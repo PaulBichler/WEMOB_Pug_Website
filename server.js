@@ -2,6 +2,7 @@ require('dotenv').config();
 
 var express = require('express');
 var app = express();
+app.set('view engine', 'pug');
 var port = process.env.PORT;
 var mongoose = require('mongoose');
 var Player = require('./api/models/player');
@@ -20,6 +21,12 @@ var enemyRoutes = require('./api/routes/enemyRoutes');
 enemyRoutes(app);
 var enemiesRoutes = require('./api/routes/enemiesRoutes');
 enemiesRoutes(app);
+
+app.get('/', (req, res) => {
+    res.render('index', {
+        title: 'Homepage'
+    });
+});
 
 app.listen(port);
 
