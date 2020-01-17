@@ -6,7 +6,10 @@ const Schema = mongoose.Schema;
 var enemySchema = new Schema({
     name: {
         type: String,
-        required: true,
+        required: true
+    },
+    image: {
+        type: String,
     },
     health: {
         type: Number,

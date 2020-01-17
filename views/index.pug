@@ -1,4 +1,9 @@
 extends default
 
 block content
-  div.container
+    div.container
+        each enemy in allEnemies
+            a(href='./enemy/' + enemy._id)  
+                div
+                    h3(style='text-align: center;') #{enemy.name}
+                    img(src= '\\' + enemy.image style='max-width: 100%; max-height: 100%; padding: 5%')

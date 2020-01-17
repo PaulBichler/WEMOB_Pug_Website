@@ -1,0 +1,24 @@
+extends default
+
+block header
+
+block content
+  div.profile
+    div.profile-image(style='background: url("' + enemy.image + '") top center
+    no-repeat; background-size: cover;')
+    div.profile-details
+      h1.profile-name
+        | #{enemy.name}
+      h2.profile-tagline
+        | #{enemy.health}
+      p.profile-bio
+        | X-Position: #{enemy.positionX}
+        | Y-Position: #{enemy.positionY}
+
+
+//block content
+    div
+        img(src='\\' + enemy.image style='max-width: 25%; max-height: 25%;')
+        p #{enemy.health}
+        p #{enemy.positionX}
+        p #{enemy.positionY}

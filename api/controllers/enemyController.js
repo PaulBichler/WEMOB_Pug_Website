@@ -1,21 +1,11 @@
 'use strict';
 
-
 var mongoose = require('mongoose');
 var Enemy = mongoose.model('Enemy');
 
-exports.get_all_enemies = function(req, res) {
-    Enemy.find({}, function(err, enemies) {
-        if(err) {
-            res.send(err);
-        } else {
-            res.json(enemies);
-        }
-    });
-};
-
 exports.add_enemy = function(req, res) {
     var new_enemy = new Enemy(req.body);
+    new_enemy.image = req.file.path;
 
     new_enemy.save(function(err, enemy) {
         if (err) {
@@ -24,6 +14,19 @@ exports.add_enemy = function(req, res) {
         }
         else {
             res.send("Enemy added!");
+        }
+    });
+};
+
+exports.get_all_enemies = function(req, res) {
+    Enemy.find({}, function(err, enemies) {
+        if(err) {
+            res.send(err);
+        } else {
+            res.render('index', {
+                title: 'Homepage',
+                allEnemies: enemies
+            });
         }
     });
 };
@@ -45,7 +48,10 @@ exports.get_enemy_by_id = function(req, res) {
             res.send(err);
         } 
         else {
-            res.json(enemy);
+            res.render('enemyProfile', {
+                title: enemy.name,
+                enemy: enemy
+            });
         }
     });
 };

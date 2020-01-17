@@ -3,15 +3,19 @@ require('dotenv').config();
 var express = require('express');
 var app = express();
 app.set('view engine', 'pug');
+
 var port = process.env.PORT;
 var mongoose = require('mongoose');
 var Player = require('./api/models/player');
 var Enemy = require('./api/models/Enemy');
 var bodyParser = require('body-parser');
+var path = require('path');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_DB, { useNewUrlParser: true, useUnifiedTopology: true });
 
+var dir = path.join(__dirname, 'public');
+app.use('/public', express.static(dir));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -23,9 +27,7 @@ var enemiesRoutes = require('./api/routes/enemiesRoutes');
 enemiesRoutes(app);
 
 app.get('/', (req, res) => {
-    res.render('index', {
-        title: 'Homepage'
-    });
+    res.redirect('../enemies');
 });
 
 app.listen(port);
