@@ -24,7 +24,7 @@ exports.get_all_enemies = function(req, res) {
             res.send(err);
         } else {
             res.render('index', {
-                title: 'Homepage',
+                title: 'Space Shooter Enemies',
                 allEnemies: enemies
             });
         }
