@@ -5,7 +5,7 @@ var Enemy = mongoose.model('Enemy');
 
 exports.add_enemy = function(req, res) {
     var new_enemy = new Enemy(req.body);
-    new_enemy.image = req.file.path;
+    if(req.file) new_enemy.image = req.file.path;
 
     new_enemy.save(function(err, enemy) {
         if (err) {
@@ -57,6 +57,7 @@ exports.get_enemy_by_id = function(req, res) {
 };
 
 exports.update_enemy_by_id = function(req, res) {
+    if(req.file) req.body.image = req.file.path;
     Enemy.findByIdAndUpdate(req.params._id, req.body, { new: true }, function(err, enemy) {
         if(err) {
             res.send(err);

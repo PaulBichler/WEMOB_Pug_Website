@@ -29,7 +29,7 @@ module.exports = function(app) {
 
     app.route('/enemy/:_id')
         .get(enemyController.get_enemy_by_id)
-        .put(tokenAuthenticator.authenticate, enemyController.update_enemy_by_id)
+        .put(tokenAuthenticator.authenticate, upload.single('image'), enemyController.update_enemy_by_id)
         .delete(tokenAuthenticator.authenticate, enemyController.delete_enemy_by_id);
     
     app.route('/enemy/getByName/:name').get(tokenAuthenticator.authenticate, enemyController.get_enemy_by_name);

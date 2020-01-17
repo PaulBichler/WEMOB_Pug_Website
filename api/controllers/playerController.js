@@ -25,7 +25,6 @@ exports.register = function(req, res) {
         }
         else {
             res.send("Registration successful!");
-            res.json(player);
         }
     });
 };
